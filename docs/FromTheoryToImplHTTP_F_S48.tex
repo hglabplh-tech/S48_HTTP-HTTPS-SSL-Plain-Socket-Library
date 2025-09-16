@@ -10,6 +10,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{ifthen}
@@ -57,6 +58,7 @@
 % end floats for footnotes
 % some commands, that could be overwritten in the style file.
 \newcommand{\rubric}[1]{\subsection*{~\hfill {\it #1} \hfill ~}}
+\newcommand{\abbrhighcol}[1]{\textbf{\underline{#1}}}
 \newcommand{\titlereference}[1]{\textsl{#1}}
 % end of "some commands"
 \title{An implementation of HTTP /HTTPS and SSL for Scheme 48 }
@@ -86,7 +88,7 @@ pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com
 \section{Abstract}
 
 \begin{flushleft}
-What we like to do is to support \textbf{\underline {SSL / HTTP  / HTTPS}} in scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use LibreSSL and (TODO Fill in) as external Libraries to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers of this components have due to much more manpower.  
+What we like to do is to support \abbrhighcol{SSL / HTTP  / HTTPS} in Scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use LibreSSL and (TODO Fill in) as external Libraries to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers of this components have due to much more manpower.  
 The goal is to implement the \textbf{\underline {HTTP /1.1}} and \textbf{\underline {HTTP/2}} and \textbf{\underline {HTTP/3}} as well. To get something  like a pseudo standard,  the interface is inspired slightly by the HTTP-EASY Library
 \href{https://pkgs.racket-lang.org/package/http-easy-lib}{HTTP-EASY (Lib Site)}  which is implemented in racket which is also inspired by scheme and which also has an R6RS Scheme standard implemented. 
 The implementation and interface is committed to the requirements defined by the following RFC Documents:
@@ -111,10 +113,10 @@ The first step to reach our goal will be to introduce a SSL capable implementati
 Short explanation of the Plain Socket / SSL Layer:
 For the SSL Layer we built up a little syntax with define-syntax,  which is a define for a new generic usable function definition which contains the protocol definition, the CTX the Certificate and the connection parameters in a record after that this command executes a handshake and  open connection in a way that we  get a port number which can be used either by LibreSSL or by the native C socket API to do HTTP / HTTPS.
 Short explanation of the HTTP / HTTPS Layer:
-The the HTTPS layer  is defined on top of the SSL Layer by the  next \code{define-syntax}.
+The HTTPS layer  is defined on top of the SSL Layer by the  next \code{define-syntax}.
 \end{flushleft}
 
-\rubric{The Plain Sockets and SSL implementations }
+\rubric{The Sockets implementations }
 \begin{flushleft}
 First of all we have to design our interface and the syntax and attributes and functional syntactic layout of our tiny DSL. After that it is necessary to build the low level functionality in C so that we can then build our things in scheme. I prefer this way because it is good to see an early success so that the work is not too long before knowing that the concept works. 
 \end{flushleft}

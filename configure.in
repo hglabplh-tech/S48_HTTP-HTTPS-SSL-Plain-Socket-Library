@@ -1,0 +1,64 @@
+#configuration file for the s48 OCI interface library and for 
+#Makefile generation  including the installation params for the lib and the
+#neccessary scheme48 components
+
+ 
+AC_INIT(c/ssl48.c)
+       AC_CANONICAL_SYSTEM
+       AC_CANONICAL_HOST 	
+AC_ARG_WITH(oracle-client,[  --with-oracle-client=oracleclientlib?withparams
+                          Oracle client dynamic library],
+        oracle_client=$withval
+,
+        AC_MSG_CHECKING(for oracle client)
+        includedir=$ORACLE_HOME/rdbms/public
+        xmldir=$ORACLE_HOME/xdk/include
+
+        ocih=oci.h
+	include=$includedir/$ocih
+        libdir=$ORACLE_HOME/lib
+        ocilib=libclntsh.so
+        lib=$libdir/$ocilib
+        if test -f "$include"; then
+	    orainc="$include"
+	    oraincdir="$includedir"
+	    oraxml="$xmldir"
+	fi
+        if test -z "$orainc"; then
+            AC_MSG_RESULT(could not guess) 
+	else
+           if test -f "$lib"; then
+		oracle_client="$lib"
+		oralib="$lib"
+		oralibdir="$libdir"
+	   fi
+           if test -z "$oracle_client"; then
+                   oracle_client="-configure could not guess-"
+                   AC_MSG_RESULT(could not guess)
+           else
+ 	        oracle_client="$oracle_client?$orainc?ORACLE_HOME=$ORACLE_HOME&ORA_NLS33=$ORACLE_HOME/ocommon/nls/admin/data"
+                LIBS="$LIBS -L$libdir -lclntsh" 
+                AC_MSG_RESULT($oracle_client)
+            fi
+         fi
+)
+        ext_incflags="-I$oraincdir -I$oraxml"
+	AC_MSG_CHECKING([compile and link flags for dynamic externals])
+	DYNAMIC_EXTERNALS_LDFLAGS=`scheme48-config --libs-external`
+	DYNAMIC_EXTERNALS_CFLAGS=`scheme48-config --cflags-external`
+	DYNAMIC_EXTERNALS_CC=`scheme48-config --cc`
+	DYNAMIC_EXTERNALS_LD=`scheme48-config --ld`
+	AC_MSG_RESULT([done])
+	AC_SUBST(DYNAMIC_EXTERNALS_LDFLAGS)
+	AC_SUBST(DYNAMIC_EXTERNALS_CFLAGS)
+	AC_SUBST(DYNAMIC_EXTERNALS_CC)
+	AC_SUBST(DYNAMIC_EXTERNALS_LD)
+        AC_SUBST(CFLAGS)
+	AC_SUBST(LDFLAGS)
+        AC_SUBST(oralib)
+        AC_SUBST(ext_incflags)
+        AC_SUBST(LIBS)
+
+        
+AC_CONFIG_FILES(Makefile) 
+AC_OUTPUT

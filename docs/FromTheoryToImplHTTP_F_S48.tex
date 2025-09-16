@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{multirow}
+\usepackage{multicol}
 \usepackage{ifthen}
 \usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 \usepackage[DIV12]{typearea}
@@ -44,9 +45,12 @@
 \setlength{\floatsep}{0.5em}
 \setlength{\textfloatsep}{\fill}
 \addtolength{\textfloatsep}{3em}
+%__________________________________________________________________________________
+\newcommand{\code}[1]{{\tt{#1}}}
 \renewcommand{\textfraction}{0.5}
 \renewcommand{\topfraction}{0.5}
 \renewcommand{\bottomfraction}{0.5}
+%__________________________________________________________________________________
 \setcounter{totalnumber}{50}
 \setcounter{topnumber}{50}
 \setcounter{bottomnumber}{50}
@@ -56,31 +60,29 @@
 \newcommand{\titlereference}[1]{\textsl{#1}}
 % end of "some commands"
 \title{An implementation of HTTP /HTTPS and SSL for Scheme 48 }
-\author{}
-\date{}
+\author{Harald Glab-Plhak {\textless}\href{mailto:hglabplhak@icloud.com}{hglabplhak@icloud.com}{\textgreater}}
+\date{\today{}}
+%______________________________________________________________________________________
 \hypersetup{
 pdftitle={An implementation of HTTP /HTTPS and SSL for Scheme 48 },
 pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com{\textgreater}}%;Mike Sperber (CEO Active Group Tübingen) {\textless}michael.sperber@active-group.de{\textgreater}}
 }
-\raggedbottom
-\begin{document}
-\maketitle
 
-%___________________________________________________________________________
-\begin{center}
-\begin{tabularx}{\docinfowidth}{lX}
-\textbf{Author}: &
-Harald Glab-Plhak  (staatl. gepr. Inf){\textless}\href{mailto:hglabplhak@icloud.com}{hglabplhak@icloud.com}{\textgreater}\\ 
-%\textbf{Author}: &
-%Mike Sperber. (CEO Active Group Tuebingen) {\textless}\href{mailto:michael.sperber@active-group.de}{michael.sperber@active-group.de}{\textgreater} \\
-\textbf{Date}: &
-\date{\today{}}\\
-\end{tabularx}
-\end{center}
+%______________________________________________________________________________________
+\begin{document}
+
+%______________________________________________________________________________________
+
+%\textbf{Author}: 
+%Mike Sperber. (CEO Active Group Tuebingen) {\textless}\href{mailto:michael.sperber@active-group.de}{michael.sperber@active-group.de}{\textgreater} \
+
+%______________________________________________________________________________________
 
 \maketitle
 \tableofcontents
 
+%______________________________________________________________________________________
+\begin{multicols}{2}
 \section{Abstract}
 
 \begin{flushleft}
@@ -109,7 +111,7 @@ The first step to reach our goal will be to introduce a SSL capable implementati
 Short explanation of the Plain Socket / SSL Layer:
 For the SSL Layer we built up a little syntax with define-syntax,  which is a define for a new generic usable function definition which contains the protocol definition, the CTX the Certificate and the connection parameters in a record after that this command executes a handshake and  open connection in a way that we  get a port number which can be used either by LibreSSL or by the native C socket API to do HTTP / HTTPS.
 Short explanation of the HTTP / HTTPS Layer:
-The the HTTPS layer  is defined on top of the SSL Layer by the  next define-syntax.
+The the HTTPS layer  is defined on top of the SSL Layer by the  next \code{define-syntax}.
 \end{flushleft}
 
 \rubric{The Plain Sockets and SSL implementations }
@@ -119,7 +121,7 @@ First of all we have to design our interface and the syntax and attributes and f
 
 \rubric{The DSL definitions}
 \begin{flushleft}
-The DSL \footnote{\textbf{\underline {DSL: }} A \textbf{\underline {D}}omain \textbf{\underline {S}}pecific \textbf{\underline {L}}anguage is a language normally built up in the host language. A DSL is designed for special tasks and areas e.g.: Windowing.} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality.\end{flushleft}
+The DSL\footnote{\textbf{\underline {DSL: }} A \textbf{\underline {D}}omain \textbf{\underline {S}}pecific \textbf{\underline {L}}anguage is a language normally built up in the host language. A DSL is designed for special tasks and areas e.g.: Windowing.} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality.\end{flushleft}
 A Domain specific language has to be defined in a way that the Function / Keywords can be used inside the definition of the syntax for the DSL
 
 \rubric{The SSL syntactic layer}
@@ -134,4 +136,5 @@ The \textbf{\underline {CTX}} will be a structure/ record-type as well as the de
 \begin{flushleft}
 The HTTP\footnote{\textbf{\underline {HTTP:}}  The \textbf{\underline {H}}yper \textbf{\underline {T}}ext \textbf{\underline {T}}ransport \textbf{\underline {P}}rotocol used for transport  e.g. \textbf{\underline {HTML}} or designing  \textbf{\underline {REST Requests}} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \textbf{\underline {GET, PUT, DELETE, HEAD}}. All of these requestshave a defined response format.} protocol has its origin in 
 \end{flushleft}
+\end{multicols}
 \end{document}

@@ -19,7 +19,7 @@ SYSDEP=@SYSDEP@
 INSTALL_ADD=@INSTALL_ADD@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
-S48OCILIB = liboci48.so
+S48SSLLIB = libsslhttp48.so
 RM	= rm -f
 
 DYNAMIC_EXTERNALS_LDFLAGS=@DYNAMIC_EXTERNALS_LDFLAGS@
@@ -48,28 +48,19 @@ host = @host@
 	$(DYNAMIC_EXTERNALS_CC) -c $(DEFS) -I./c $(ext_incflags) $(DYNAMIC_EXTERNALS_CFLAGS) $(DEBUG_FLAGS) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 # Targets:
 
-OCI48OBJS = \
-	$(srcdir)/c/oci48.o \
-	$(srcdir)/c/nlsfunc.o \
-	$(srcdir)/c/general.o \
-	$(srcdir)/c/buffers.o \
-	$(srcdir)/c/transaction.o \
-	$(srcdir)/c/sqlproc.o \
-	$(srcdir)/c/lobio.o \
-	$(srcdir)/c/xmldb.o \
-	$(srcdir)/c/objects.o \
-	$(srcdir)/c/xmlschema.o \
-	$(srcdir)/c/utils.o
+SSL48OBJS= \ 
+	$(srcdir)/c/ssl48.o \
+	$(srcdir)/c/sslutils.o
 
-all: $(S48OCILIB)
+all: $(S48SSLLIB)
 configure: configure.in
 	autoconf
 clean:
-	rm $(S48OCILIB) $(OCI48OBJS)
+	rm $(S48SSLLIB) $(SSL48OBJS)
 
-$(OCI48OBJS): $(srcdir)/c/oci48.h $(srcdir)/c/utils.h $(srcdir)/c/xmldb.h
+$(OCI48OBJS): $(srcdir)/c/ssl48.h $(srcdir)/c/sslutils.h
 
 
 $(S48OCILIB): $(OCI48OBJS)
-	$(DYNAMIC_EXTERNALS_LD) $(DYNAMIC_EXTERNALS_LDFLAGS) $(LDFLAGS) $(OCI48OBJS) $(LIBS) -o $(S48OCILIB)
+	$(DYNAMIC_EXTERNALS_LD) $(DYNAMIC_EXTERNALS_LDFLAGS) $(LDFLAGS) $(SSL48OBJS) $(LIBS) -o $(S48SSLLIB)
 

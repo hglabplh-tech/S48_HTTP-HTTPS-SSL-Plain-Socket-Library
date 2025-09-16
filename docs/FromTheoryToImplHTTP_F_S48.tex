@@ -60,7 +60,7 @@
 \date{}
 \hypersetup{
 pdftitle={An implementation of HTTP /HTTPS and SSL for Scheme 48 },
-pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com{\textgreater};Mike Sperber (CEO Active Group Tübingen) {\textless}michael.sperber@active-group.de{\textgreater}}
+pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com{\textgreater}}%;Mike Sperber (CEO Active Group Tübingen) {\textless}michael.sperber@active-group.de{\textgreater}}
 }
 \raggedbottom
 \begin{document}
@@ -70,9 +70,9 @@ pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com
 \begin{center}
 \begin{tabularx}{\docinfowidth}{lX}
 \textbf{Author}: &
-	Harald Glab-Plhak  (staatl. gepr. Inf){\textless}\href{mailto:hglabplhak@icloud.com}{hglabplhak@icloud.com}{\textgreater} \\
-\textbf{Author}: &
-	Mike Sperber. (CEO Active Group Tuebingen) {\textless}\href{mailto:michael.sperber@active-group.de}{michael.sperber@active-group.de}{\textgreater} \\
+Harald Glab-Plhak  (staatl. gepr. Inf){\textless}\href{mailto:hglabplhak@icloud.com}{hglabplhak@icloud.com}{\textgreater}\\ 
+%\textbf{Author}: &
+%Mike Sperber. (CEO Active Group Tuebingen) {\textless}\href{mailto:michael.sperber@active-group.de}{michael.sperber@active-group.de}{\textgreater} \\
 \textbf{Date}: &
 \date{\today{}}\\
 \end{tabularx}
@@ -84,8 +84,8 @@ pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com
 \section{Abstract}
 
 \begin{flushleft}
-What we like to do is to support SSL / HTTP  / HTTPS in scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use LibreSSL and (TODO Fill in) as external Libraries to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers of this components have due to much more manpower.  
-The goal is to implement the HTTP /1.1 and HTTP/2 and HTTP/3 as well. To get something  like a pseudo standard,  the interface is inspired slightly by the HTTP-EASY Library
+What we like to do is to support \textbf{\underline {SSL / HTTP  / HTTPS}} in scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use LibreSSL and (TODO Fill in) as external Libraries to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers of this components have due to much more manpower.  
+The goal is to implement the \textbf{\underline {HTTP /1.1}} and \textbf{\underline {HTTP/2}} and \textbf{\underline {HTTP/3}} as well. To get something  like a pseudo standard,  the interface is inspired slightly by the HTTP-EASY Library
 \href{https://pkgs.racket-lang.org/package/http-easy-lib}{HTTP-EASY (Lib Site)}  which is implemented in racket which is also inspired by scheme and which also has an R6RS Scheme standard implemented. 
 The implementation and interface is committed to the requirements defined by the following RFC Documents:
 \end{flushleft}
@@ -95,7 +95,7 @@ The implementation and interface is committed to the requirements defined by the
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9113.pdf}{RFC-9113 (HTTP/2)} \\The specification of the Hyper Text Transfer Protocol / 2 ( Authors:             M. Thomson, Ed. , C. Benfield, Ed. )\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9114.pdf}{RFC-9114 (HTTP/3)} \\The specification of the Hyper Text Transfer Protocol / 3( Authors: M. Bishop, Ed. ) \\
 \end{flushleft}\begin{flushleft}
-In addition to the client library a full  functional toolkit will be implemented for developing application containers with RESTful|\footnote{REST Requests: The RepresEntational State Transfer API is an architectural style and the RESTful services follows this specification to design a special form of HTTP requests.} interfaces (e.g. using YAML definitions) or at last my be application containers and something like OCSP\footnote{OCSP: The Open Certificate Service Protocol is used to implement servers with OCSP Requests and defined OCSP  Responses to check the correctness and the validity of a certificate.} Services.
+In addition to the client library a full  functional toolkit will be implemented for developing application containers with RESTful|\footnote{\textbf{\underline {REST Requests:}}The \textbf{\underline {R}}epres\textbf{\underline {E}}ntational \textbf{\underline {S}}tate \textbf{\underline {T}}ransfer API is an architectural style and the RESTful services follows this specification to design a special form of HTTP requests.} interfaces (e.g. using YAML definitions) or at last my be application containers and something like OCSP\footnote{\textbf{\underline {OCSP}}: The \textbf{\underline {O}}pen \textbf{\underline {C}}ertificate \textbf{\underline {S}}ervice \textbf{\underline {P}}rotocol is used to implement servers being requested using OCSP Requests and defined OCSP  Responses for checking the correctness and the validity of a certificate.} Services.
 This will be really enough for the first step.
 \end{flushleft}
 
@@ -112,20 +112,26 @@ Short explanation of the HTTP / HTTPS Layer:
 The the HTTPS layer  is defined on top of the SSL Layer by the  next define-syntax.
 \end{flushleft}
 
-\subsection{The Plain Sockets and SSL implementations }
+\rubric{The Plain Sockets and SSL implementations }
 \begin{flushleft}
-First of all we have to design our interface and the syntax and attributes and functional syntactic layout of our tiny DSL. After that it is necessary to build the low level functionality in C so that we can then build our things in scheme. I prefer this way because it is good to see a early success so that the work is not to long before knowing that the concept works. 
+First of all we have to design our interface and the syntax and attributes and functional syntactic layout of our tiny DSL. After that it is necessary to build the low level functionality in C so that we can then build our things in scheme. I prefer this way because it is good to see an early success so that the work is not too long before knowing that the concept works. 
 \end{flushleft}
 
-\subsection{The SSL Layer}
+\rubric{The DSL definitions}
 \begin{flushleft}
-The DSL \footnote{Domain Specific Language} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality. At first we need a syntax to declare a Socket Plain/ SSL. Here we have to think about connection parameters and about parameters and attributes for \textbf{\underline {SSL / TLS}} (e.g. CTX and certificate keys and a specific Algorithm for transport. 
-The CTX will be a structure/ record-type as well as the definition of the base connection parameters. \end{flushleft}
+The DSL \footnote{\textbf{\underline {DSL: }} A \textbf{\underline {D}}omain \textbf{\underline {S}}pecific \textbf{\underline {L}}anguage is a language normally built up in the host language. A DSL is designed for special tasks and areas e.g.: Windowing.} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality.\end{flushleft}
+A Domain specific language has to be defined in a way that the Function / Keywords can be used inside the definition of the syntax for the DSL
+
+\rubric{The SSL syntactic layer}
+\begin{flushleft}
+ At first we need a syntax to declare a Socket\textbf{\underline {Plain/ SSL}}. Here we have to think about connection parameters and about parameters and attributes for \textbf{\underline {SSL / TLS}} (e.g. \textbf{\underline {CTX}} and certificate keys and a specific Algorithm for transport. 
+The \textbf{\underline {CTX}} will be a structure/ record-type as well as the definition of the base connection parameters. 
+\end{flushleft}
 
 
 \section{APPENDIX A: Terminology Explained in short}
 \subsection{The HTTP 1.1 / 2 / 3 Protocol}
 \begin{flushleft}
-The HTTP\footnote{HTTP:  The Hyper Text Transport Protocol used for transport  e.g. HTML or designing REST Requests . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like GET, PUT, DELETE, HEAD} protocol has its origin in 
+The HTTP\footnote{\textbf{\underline {HTTP:}}  The \textbf{\underline {H}}yper \textbf{\underline {T}}ext \textbf{\underline {T}}ransport \textbf{\underline {P}}rotocol used for transport  e.g. \textbf{\underline {HTML}} or designing  \textbf{\underline {REST Requests}} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \textbf{\underline {GET, PUT, DELETE, HEAD}}. All of these requestshave a defined response format.} protocol has its origin in 
 \end{flushleft}
 \end{document}

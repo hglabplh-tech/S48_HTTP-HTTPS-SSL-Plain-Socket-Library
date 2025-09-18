@@ -130,41 +130,69 @@ Short explanation of the HTTP / HTTPS Layer:
 The HTTPS layer  is defined on top of the SSL Layer by the  next \code{define-syntax}.
 \end{flushleft}
 
-\rubric{The Sockets implementations }
+\subsection{The Sockets implementations }
 \begin{flushleft}
 First of all we have to design our interface and the syntax and attributes and functional syntactic layout of our tiny DSL. After that it is necessary to build the low level functionality in C so that we can then build our things in scheme. I prefer this way because it is good to see an early success so that the work is not too long before knowing that the concept works. The first part that we develop of course. also as a base for the DSL is a. procedural interface (function calls).
 \end{flushleft}
-\rubric{Issues for the project}
+\subsection{Issues for the project}
 \begin{flushleft}
 Here are some issues  which are important for our task:
-\begin{itemize}
-\item We have to plan that the whole implementation is threadsafe
-
-\item The implementation uses the existing port interface of Scheme48
-
-\item We use some kind of pseudo code to describe the logic here
-
-\item On top the URL encoding has to be implemented as well as Basic and Certificate AUTH Headers 
+ \begin{itemize}
+ \item{How read / write is planned}
+    \begin{itemize}
+        \item{Using the new. Port / Channeel I/O written for R6RS}
+        \item{Make it stable for multi-threading via atomically}        
+    \end{itemize}
+\item{We use some kind of pseudo code to describe the logic here}
+   \begin{itemize}
+        \item{Using the My Lisp dialect / McCarthy Lisp dialect and formula}
+    \end{itemize}
+\item{Additional things which we will implement}
+    \begin{itemize}
+       \item{Implement URL encoding}
+       \item{Basic and Certificate AUTH Headers} 
+       \item{Implement base for RESTful services including yaml like definition and JSON support}
+       \item{Implement MULTIPart attachemenzs with MIME spec.}
+   \end{itemize}
 \end{itemize}
 \end{flushleft}
 
-\rubric{The DSL definitions}
+\subsection{The DSL definitions}
 \begin{flushleft}
 The DSL\footnote{\abbrhighcol{DSL: } A \abbrhighcol {D}omain \abbrhighcol{S}pecific \abbrhighcol{L}anguage is a language normally built up in the host language. A DSL is designed for special tasks and areas e.g.: Windowing.} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality.
 \end{flushleft}
 A Domain specific language has to be defined in a way that the Function / Keywords can be used inside the definition of the syntax for the DSL
 
-\rubric{The SSL syntactic layer}
+\subsection{The SSL syntactic layer}
 \begin{flushleft}
  At first we need a syntax to declare a Socket\abbrhighcol  {Plain/ SSL}. Here we have to think about connection parameters and about parameters and attributes for \abbrhighcol  {SSL / TLS} (e.g. \abbrhighcol  {CTX} and certificate keys and a specific Algorithm for transport. 
 The\abbrhighcol  {CTX} will be a structure/ record-type as well as the definition of the base connection parameters. 
 \end{flushleft}
-\section{The SSL procedural interface in C / Scheme}
-
+\section{Procedural interface definitions}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The SSL procedural interface in C / Scheme}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The HTTP/HTTPS Client side procedural interface in C / Scheme}
+\begin{flushleft}
+\end{flushleft}
+\subsubsection{Transport}
+\begin{flushleft}
+\end{flushleft}
+\subsubsection{Multipart attachements}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The HTTP/HTTPS Server side procedural interface in C / Scheme}
 \begin{flushleft}
 \end{flushleft}
 
-
+\subsubsection{Transport}
+\begin{flushleft}
+\end{flushleft}
+\subsubsection{Multipart attachements}
+\begin{flushleft}
+\end{flushleft}
 
 %_________________________________________________________________________-------
 \section{APPENDIX A: Terminology Explained in short}

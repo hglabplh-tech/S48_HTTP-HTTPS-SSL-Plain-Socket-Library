@@ -88,10 +88,10 @@ pdfauthor={Harald Glab-Plhak (staatl.gepr. Inf) {\textless}hglabplhak@icloud.com
 \section{Abstract}
 
 \begin{flushleft}
-What we like to do is to support \abbrhighcol{SSL / HTTP  / HTTPS} in Scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use LibreSSL and (TODO Fill in) as external Libraries to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers of this components have due to much more manpower.  
-The goal is to implement the \abbrhighcol{HTTP /1.1} and \abbrhighcol{HTTP/2} and \abbrhighcol{HTTP/3} as well. To get something  like a pseudo standard,  the interface is inspired slightly by the HTTP-EASY Library
-\href{https://pkgs.racket-lang.org/package/http-easy-lib}{HTTP-EASY (Lib Site)}  which is implemented in racket which is also inspired by scheme and which also has an R6RS Scheme standard implemented. 
-The implementation and interface is committed to the requirements defined by the following RFC Documents:
+What we like to do is to support \abbrhighcol{SSL / HTTP  / HTTPS} in Scheme 48. The interface for that will be implemented nearly implemented as Domain Specific Language for Networking. I will use  \abbrhighcol{LibreSSL} as external library to avoid errors and bugs in the implementation by doing that on my own with much less time than the developers and designers this components have due to much more manpower.  
+The goal is to implement the \abbrhighcol{HTTP /1.1} and \abbrhighcol{HTTP/2} and \abbrhighcol{HTTP/3} as well. To get something  like a pseudo standard,  the interface is inspired by the \abbrhighcol{HTTP-EASY} library written in  \abbrhighcol{Racket Language} and is a free style. port of it (we use the codebase and transfer it to real scheme and make it fit to S48)
+\href{https://pkgs.racket-lang.org/package/http-easy-lib}{HTTP-EASY (Lib Site)}  which is implemented in racket which is also inspired by scheme and which also has an \abbrhighcol{R6RS} Scheme standard implemented. 
+The implementation and interface is committed to the requirements defined by the following  \abbrhighcol{RFC Documents:}
 \end{flushleft}
 
 \begin{flushleft}
@@ -111,8 +111,12 @@ Independent,  E. Rescorla RTFM, Inc.\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9112.pdf}{RFC-9112 (HTTP/1.1)}\\The specification of the Hyper Text Transfer Protocol / 1.1 ( Authors: R. Fielding, Ed. , M. Nottingham, Ed.,  J. Reschke, Ed. ) \\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9110.pdf}{RFC-9110 (HTTP Semantics)} \\The semantics specification of the Hyper Text Transfer Protocol (Authors: R. Fielding, Ed., M. Nottingham, Ed., J. Reschke, Ed.)\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9113.pdf}{RFC-9113 (HTTP/2)} \\The specification of the Hyper Text Transfer Protocol / 2 ( Authors:             M. Thomson, Ed. , C. Benfield, Ed. )\\
+\hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/pdfrfc/rfc7541.txt.pdf}{RFC-7541 (HPAC)} \\HPACK: Field Compression for HTTP/2 Authors:  R. Peon Google Inc., H. Ruellan Canon CRF\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9114.pdf}{RFC-9114 (HTTP/3)} \\The specification of the Hyper Text Transfer Protocol / 3( Authors: M. Bishop, Ed. ) \\
-\end{flushleft}\begin{flushleft}
+\hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9204.pdf}{RFC-9204 (QPAC)} \\QPACK: Field Compression for HTTP/3 Authors: C. Krasic, M. Bishop Akamai Technologies,
+A. Frindell, Ed.Facebook
+\end{flushleft}
+\begin{flushleft}
 In addition to the client library a full  functional toolkit will be implemented for developing application containers with RESTful|\footnote{\abbrhighcol {REST Requests:}The \abbrhighcol {R}epres\abbrhighcol  {E}ntational abbrhighcol{S}tate abbrhighcol{T}ransfer API is an architectural style and the RESTful services follows this specification to design a special form of HTTP requests.} interfaces (e.g. using YAML definitions) or at last my be application containers and something like OCSP\footnote{ \abbrhighcol {OCSP}: The \abbrhighcol  {O}pen \abbrhighcol {C}ertificate \abbrhighcol  {S}ervice \abbrhighcol  {P}rotocol is used to implement servers being requested using OCSP Requests and defined OCSP  Responses for checking the correctness and the validity of a certificate.} Services.
 This will be really enough for the first step.
 \end{flushleft}
@@ -157,7 +161,26 @@ Here are some issues  which are important for our task:
 \end{itemize}
 \end{flushleft}
 
-\subsection{The DSL definitions}
+
+\subsection{The procedural interface}
+\begin{flushleft}
+The procedural interface is the interface where several functions are defined for each layer. This interface can be used in a very flexible way. This part is the positive thing about this part of implementation. The negative effect of this part of interface is that the function have to be used in the right way and order. In cause of that we define also a DSL which ensures the usage of the functions in the right way. This part will be described. later. 
+\end{flushleft}
+
+
+\subsection{Procedural Interface for Sockets}
+\begin{flushleft}
+The interface for defining Sockets is build by using the C-Socket API and for the Secure Socket Layer and Transport Security Layer LibreSSL is used.
+Th functions we need are called in a Scheme48 FFI Module. The FFI is the Foreign Function Interface. With this interface the functions can be called and S48 values can be returned which we use after defining this layer in the pure scheme part.
+\end{flushleft}
+
+\subsection{Procedural Interface for HTTP/ HTTPS}
+\begin{flushleft}
+In this part of the procedural interface the HTTP / HTTPS protocols are implemented V1.1 the older nearly outdated format although it is widely used up to now.The V 2.0 with HPAC\footnote{\abbrhighcol{HPAC: } Header Compression for HTTP/2} and V 3.0 with QPAC \footnote{\abbrhighcol{QPAC: } Header Compression for HTTP/3}.  
+\end{flushleft}
+
+
+\subsection{The DSL definition as interface}
 \begin{flushleft}
 The DSL\footnote{\abbrhighcol{DSL: } A \abbrhighcol {D}omain \abbrhighcol{S}pecific \abbrhighcol{L}anguage is a language normally built up in the host language. A DSL is designed for special tasks and areas e.g.: Windowing.} for the SSL Layer itself will be designed by using the define-syntax and the other hygienic macro functionality.
 \end{flushleft}
@@ -168,13 +191,28 @@ A Domain specific language has to be defined in a way that the Function / Keywor
  At first we need a syntax to declare a Socket\abbrhighcol  {Plain/ SSL}. Here we have to think about connection parameters and about parameters and attributes for \abbrhighcol  {SSL / TLS} (e.g. \abbrhighcol  {CTX} and certificate keys and a specific Algorithm for transport. 
 The\abbrhighcol  {CTX} will be a structure/ record-type as well as the definition of the base connection parameters. 
 \end{flushleft}
+
+\subsection{The HTTP / HTTPS  syntactic layer}
+\begin{flushleft}
+In this layer a grammar is defined to have a save way to create \abbrhighcol{ HTTP (GET, PUT, POST, DELETE,HEAD....)} Requests and to define the request data in the same step. With the created 'object' a send can be done. The same is done for the server side receive the other way round. There is also a grammar defined for sending the HTTP / HTTPS request to the server. and to handle / give back the response. 
+\end{flushleft}
+
+
+%_______________________________________________________________-
+% Section three
+%_______________________________________________________________-
 \section{Procedural interface definitions}
 \begin{flushleft}
+First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deep technical know how about all these things and the possibilities is neccesary.
+And now finally let's dive into it more detailed.
 \end{flushleft}
 \subsection{The SSL procedural interface in C / Scheme}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP/HTTPS Client side procedural interface in C / Scheme}
+\subsection{The HTTP/HTTPS Common functionality}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The HTTP/HTTPS Client side procedural interface in  Scheme}
 \begin{flushleft}
 \end{flushleft}
 \subsubsection{Transport}
@@ -183,7 +221,7 @@ The\abbrhighcol  {CTX} will be a structure/ record-type as well as the definitio
 \subsubsection{Multipart attachements}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP/HTTPS Server side procedural interface in C / Scheme}
+\subsection{The HTTP/HTTPS Server side procedural interface in Scheme}
 \begin{flushleft}
 \end{flushleft}
 

@@ -117,7 +117,7 @@ Independent,  E. Rescorla RTFM, Inc.\\
 A. Frindell, Ed.Facebook
 \end{flushleft}
 \begin{flushleft}
-In addition to the client library a full  functional toolkit will be implemented for developing application containers with RESTful|\footnote{\abbrhighcol {REST Requests:}The \abbrhighcol {R}epres\abbrhighcol  {E}ntational abbrhighcol{S}tate abbrhighcol{T}ransfer API is an architectural style and the RESTful services follows this specification to design a special form of HTTP requests.} interfaces (e.g. using YAML definitions) or at last my be application containers and something like OCSP\footnote{ \abbrhighcol {OCSP}: The \abbrhighcol  {O}pen \abbrhighcol {C}ertificate \abbrhighcol  {S}ervice \abbrhighcol  {P}rotocol is used to implement servers being requested using OCSP Requests and defined OCSP  Responses for checking the correctness and the validity of a certificate.} Services.
+In addition to the client library a full  functional toolkit will be implemented for developing application containers with \abbrhighcol {RESTful}\footnote{\abbrhighcol {REST Requests:}The \abbrhighcol {R}epres\abbrhighcol  {E}ntational abbrhighcol{S}tate abbrhighcol{T}ransfer API is an architectural style and the RESTful services follows this specification to design a special form of HTTP requests.} interfaces (e.g. using \abbrhighcol {YAML} definitions) or at last my be application containers and something like \abbrhighcol {OCSP}\footnote{ \abbrhighcol {OCSP}: The \abbrhighcol  {O}pen \abbrhighcol {C}ertificate \abbrhighcol  {S}ervice \abbrhighcol  {P}rotocol is used to implement servers being requested using OCSP Requests and defined OCSP  Responses for checking the correctness and the validity of a certificate.} Services.
 This will be really enough for the first step.
 \end{flushleft}
 
@@ -165,13 +165,14 @@ Here are some issues  which are important for our task:
 \subsection{The procedural interface}
 \begin{flushleft}
 The procedural interface is the interface where several functions are defined for each layer. This interface can be used in a very flexible way. This part is the positive thing about this part of implementation. The negative effect of this part of interface is that the function have to be used in the right way and order. In cause of that we define also a DSL which ensures the usage of the functions in the right way. This part will be described. later. 
+For getting a clear architecture the implementations are divided in a low-level interface on which the high level interface (The recommended interface) is built as layer with more simple. and straight arguments not needing too much technical details for better under5standing by the people using the library. 
 \end{flushleft}
 
 
 \subsection{Procedural Interface for Sockets}
 \begin{flushleft}
 The interface for defining Sockets is build by using the C-Socket API and for the Secure Socket Layer and Transport Security Layer LibreSSL is used.
-Th functions we need are called in a Scheme48 FFI Module. The FFI is the Foreign Function Interface. With this interface the functions can be called and S48 values can be returned which we use after defining this layer in the pure scheme part.
+Th functions we need are called in a Scheme48 FFI Module. The FFI is the Foreign Function Interface. With this interface the functions can be called and S48 values can be returned which we use after defining this layer in the pure scheme part.  
 \end{flushleft}
 
 \subsection{Procedural Interface for HTTP/ HTTPS}
@@ -203,7 +204,7 @@ In this layer a grammar is defined to have a save way to create \abbrhighcol{ HT
 %_______________________________________________________________-
 \section{Procedural interface definitions}
 \begin{flushleft}
-First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deep technical know how about all these things and the possibilities is neccesary.
+First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deeper technical know how as in the syntactic layer about all these things and the possibilities is neccessary.
 And now finally let's dive into it more detailed.
 \end{flushleft}
 \subsection{The SSL procedural interface in C / Scheme}
@@ -212,23 +213,22 @@ And now finally let's dive into it more detailed.
 \subsection{The HTTP/HTTPS Common functionality}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP/HTTPS Client side procedural interface in  Scheme}
+\subsection{The HTTP/HTTPS procedural interface in  Scheme}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{Transport}
+\subsubsection{The transport layer}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{Multipart attachements}
+\subsubsection{The HTTP Method definition and the resource definition}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP/HTTPS Server side procedural interface in Scheme}
-\begin{flushleft}
-\end{flushleft}
-
-\subsubsection{Transport}
+\subsubsection{The header compression for HTTP/2 and HTTP/3 HPAC / QPAC}
 \begin{flushleft}
 \end{flushleft}
 \subsubsection{Multipart attachements}
+\begin{flushleft}
+\end{flushleft}
+\subsection{RESTful service layer over HTTP }
 \begin{flushleft}
 \end{flushleft}
 
@@ -236,7 +236,7 @@ And now finally let's dive into it more detailed.
 \section{APPENDIX A: Terminology Explained in short}
 \subsection{The HTTP 1.1 / 2 / 3 Protocol}
 \begin{flushleft}
-The HTTP\footnote{\abbrhighcol{HTTP:}  The \abbrhighcol{H}yper \abbrhighcol{T}ext \abbrhighcol {T}ransport \abbrhighcol {P}rotocol used for transport  e.g. \abbrhighcol{HTML} or designing  \abbrhighcol{REST Requests} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \abbrhighcol{GET, PUT, DELETE, HEAD}. All of these requestshave a defined response format.} protocol has its origin in 
+The HTTP\footnote{\abbrhighcol{HTTP:}  The \abbrhighcol{H}yper \abbrhighcol{T}ext \abbrhighcol {T}ransport \abbrhighcol {P}rotocol used for transport  e.g. \abbrhighcol{HTML} or designing  \abbrhighcol{REST Requests} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \abbrhighcol{GET, PUT, DELETE, HEAD ...}. All of these requestshave a defined response format.} protocol has its origin in 
 \end{flushleft}
 
 

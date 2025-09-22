@@ -204,7 +204,7 @@ In this layer a grammar is defined to have a save way to create \abbrhighcol{ HT
 %_______________________________________________________________-
 \section{Procedural interface definitions}
 \begin{flushleft}
-First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deeper technical know how as in the syntactic layer about all these things and the possibilities is neccessary.
+First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deeper technical know how as in the syntactic layer about all these things and the possibilities is   neccessary.
 And now finally let's dive into it more detailed.
 \end{flushleft}
 \subsection{The SSL procedural interface in C / Scheme}
@@ -216,31 +216,38 @@ And now finally let's dive into it more detailed.
 \subsection{The HTTP/HTTPS procedural interface in  Scheme}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{The transport layer}
+\subsection{The transport layer}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{The HTTP Method definition and the resource definition}
+\subsection{The HTTP Method definition and the resource definition}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{The header compression for HTTP/2 and HTTP/3 HPAC / QPAC}
+\subsection{The QUIC protocol implementation}
 \begin{flushleft}
 \end{flushleft}
-\subsubsection{Multipart attachements}
+\subsection{The header compression for HTTP/2 and HTTP/3 HPAC / QPAC}
+\begin{flushleft}
+\end{flushleft}
+\subsection{Multipart attachements}
 \begin{flushleft}
 \end{flushleft}
 \subsection{RESTful service layer over HTTP }
 \begin{flushleft}
 \end{flushleft}
 
-%_________________________________________________________________________-------
+%__________________________________________________________________________________________
 \section{APPENDIX A: Terminology Explained in short}
-\subsection{The HTTP 1.1 / 2 / 3 Protocol}
+\subsection{The HTTP 1.1 / 2 / 3 Protocol}   
 \begin{flushleft}
-The HTTP\footnote{\abbrhighcol{HTTP:}  The \abbrhighcol{H}yper \abbrhighcol{T}ext \abbrhighcol {T}ransport \abbrhighcol {P}rotocol used for transport  e.g. \abbrhighcol{HTML} or designing  \abbrhighcol{REST Requests} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \abbrhighcol{GET, PUT, DELETE, HEAD ...}. All of these requestshave a defined response format.} protocol has its origin in 
+The HTTP\footnote{\abbrhighcol{HTTP:}  The \abbrhighcol{H}yper \abbrhighcol{T}ext \abbrhighcol {T}ransport \abbrhighcol {P}rotocol used for transport  e.g. \abbrhighcol{HTML} or designing  \abbrhighcol{REST Requests} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \abbrhighcol{GET, PUT, DELETE, HEAD ...}. All of these requests have a defined response format.} was developed for transport of data over TCP/IP in a well defined structured way  
+The HTTP 1.1 protocol was and is widely used for a long time.
+After this the HTTP 2.0 protocol was developed containing many new features and optimizing especially in compressing header information via HPAC to lower the amount of data transported per each request.
+With the HTTP/3 now a new way is established with a protocol not based on TCP/IP but on a protocol called QUIC which is built on top of UDP.
 \end{flushleft}
-
-
-
-
+\subsection{The HTTP/2 and HTTP/3 protocols}
+\begin{flushleft}
+The HTTP/2 protocol is. built on top of the TCP/IP. protocol. A. header values compression takes place here called HPACK. HPACK uses the Huffman algorithm to compress header values in an encode / decode process. Since TCP / IP is designed im the first priority to be reliable and to keep data consistent as well as not loosing data packages it is not optimal for transporting a high amount of data even also parallel in a short time. For that reason \abbrhighcol{HTTP/3} was developed based on the \abbrhighcol {QUIC protocol} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {UDP} \abbrhighcol{I}nternet \abbrhighcol{C}onnection}.
+\abbrhighcol {TCP}\footnote{\abbrhighcol {TCP:} \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} and \abbrhighcol {UDP} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} are two different ways of handling data transfer and requests in the internet.They handle data and requests and responses. in another way. UDP is connection less unordered and faster. TCP has the advantage that data loss is correctly detected and handled and that the data are checked for consistence. The QUIC protocol is designed to have a way of using UDP with the additional advantage that the consistence of data is save as far as possible.  
+\end{flushleft}
 \end{multicols}
 \end{document}

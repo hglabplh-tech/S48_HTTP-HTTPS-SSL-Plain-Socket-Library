@@ -113,6 +113,8 @@ Independent,  E. Rescorla RTFM, Inc.\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9113.pdf}{RFC-9113 (HTTP/2)} \\The specification of the Hyper Text Transfer Protocol / 2 ( Authors:             M. Thomson, Ed. , C. Benfield, Ed. )\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/pdfrfc/rfc7541.txt.pdf}{RFC-7541 (HPAC)} \\HPACK: Field Compression for HTTP/2 Authors:  R. Peon Google Inc., H. Ruellan Canon CRF\\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9114.pdf}{RFC-9114 (HTTP/3)} \\The specification of the Hyper Text Transfer Protocol / 3( Authors: M. Bishop, Ed. ) \\
+\hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9000.pdf}{RFC-9000 (QUIC)} \\The specification of Quick UDP Internet Connections( Authors: J. Iyengar, Ed. Fastly
+M. Thomson, Ed. Mozilla) \\
 \hspace*{1em}-- \href{https://www.rfc-editor.org/rfc/rfc9204.pdf}{RFC-9204 (QPAC)} \\QPACK: Field Compression for HTTP/3 Authors: C. Krasic, M. Bishop Akamai Technologies,
 A. Frindell, Ed.Facebook
 \end{flushleft}
@@ -207,25 +209,34 @@ In this layer a grammar is defined to have a save way to create \abbrhighcol{ HT
 First we design and implement the procedural interface. In this interface we define functions for the different tasks. The parameters and the returns are designed in a way that  the functions are doing a create of the request, a connection establishment and the send .... for each task there  are  one or more functions. Of course the functions differ if the use either a secure or a non secure connection and transmission. For using that interface a deeper technical know how as in the syntactic layer about all these things and the possibilities is   neccessary.
 And now finally let's dive into it more detailed.
 \end{flushleft}
-\subsection{The SSL procedural interface in C / Scheme}
+\subsection{The SSL/TLS procedural interface in C / Scheme}
 \begin{flushleft}
 \end{flushleft}
 \subsection{The HTTP/HTTPS Common functionality}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP/HTTPS procedural interface in  Scheme}
+\subsection{The HTTP/HTTPS procedural interface in  Scheme (Part for all three versions)}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The transport layer}
+\subsection{HTTP/1.1 specific implementation // procedural}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The HTTP Method definition and the resource definition}
+\subsection{The HTTP/2 specific implementation // procedural}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The header compression for HTTP/2(HPAC)}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The HTTP/3 specific implementation // procedural}
 \begin{flushleft}
 \end{flushleft}
 \subsection{The QUIC protocol implementation}
 \begin{flushleft}
 \end{flushleft}
-\subsection{The header compression for HTTP/2 and HTTP/3 HPAC / QPAC}
+\subsection{The header compression for HTTP/3(QPAC)}
+\begin{flushleft}
+\end{flushleft}
+\subsection{The HTTP Method definition and the resource(input) definition}
 \begin{flushleft}
 \end{flushleft}
 \subsection{Multipart attachements}
@@ -246,8 +257,8 @@ With the HTTP/3 now a new way is established with a protocol not based on TCP/IP
 \end{flushleft}
 \subsection{The HTTP/2 and HTTP/3 protocols}
 \begin{flushleft}
-The HTTP/2 protocol is. built on top of the TCP/IP. protocol. A. header values compression takes place here called HPACK. HPACK uses the Huffman algorithm to compress header values in an encode / decode process. Since TCP / IP is designed im the first priority to be reliable and to keep data consistent as well as not loosing data packages it is not optimal for transporting a high amount of data even also parallel in a short time. For that reason \abbrhighcol{HTTP/3} was developed based on the \abbrhighcol {QUIC protocol} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {UDP} \abbrhighcol{I}nternet \abbrhighcol{C}onnection}.
-\abbrhighcol {TCP}\footnote{\abbrhighcol {TCP:} \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} and \abbrhighcol {UDP} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} are two different ways of handling data transfer and requests in the internet.They handle data and requests and responses. in another way. UDP is connection less unordered and faster. TCP has the advantage that data loss is correctly detected and handled and that the data are checked for consistence. The QUIC protocol is designed to have a way of using UDP with the additional advantage that the consistence of data is save as far as possible.  
+The HTTP/2 protocol is. built on top of the TCP/IP. protocol. A. header values compression takes place here called HPACK. HPACK uses the Huffman algorithm to compress header values in an encode / decode process. Since TCP / IP is designed im the first priority to be reliable and to keep data consistent as well as not loosing data packages it is not optimal for transporting a high amount of data even also parallel in a short time. For that reason \abbrhighcol{HTTP/3} was developed based on the \abbrhighcol {QUIC protocol} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection}.
+\abbrhighcol {TCP}\footnote{\abbrhighcol {TCP:} \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} and \abbrhighcol {UDP} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} are two different ways of handling data transfer and requests in the internet.They handle data and requests and responses. in another way. UDP is connection less unordered and faster. TCP has the advantage that data loss is correctly detected and handled and that the data are checked for consistence the disadvantage is that there is a problem of blocking all transmission in case of a package loss. The QUIC protocol is designed to use UDP with additions  that the consistence of data is save  the advantage is here that the transmissions goes on if there is a package loss as far as it is possible there is no blocking state in cause of package loss.  
 \end{flushleft}
 \end{multicols}
 \end{document}

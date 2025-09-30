@@ -188,7 +188,7 @@ And now finally let's dive into it more detailed.
 \subsection{The SSL/TLS procedural interface in C / Scheme}
 \subsubsection{The SSL / TLS procedural interface which is based on \abbrhighcol{LibreSSL} is structured as follows:}
 \begin{flushleft}
-At first we have a layer which wraps the LibreSSL functions with an interface definition according to the FFI for C in Scheme 48.  
+At first we have a layer which wraps the LibreSSL functions with an interface definition according to the FFI for C in Scheme 48.  \newline The first functions we need are that to initialise a socket with SSL / TLS attributes and the right context to establish a secure socket connection via TCP/IP the connection for the QUIC (HTTP/3) is done in a separate task and with separate code.  \newline After having the code for the initialisation and the connect we have to develop the functions for \newline \code open -> read / write -> close / finish (free socket). \newline This functions are written (except the finishing) in pure Scheme by using the existing port I/O in Scheme 48.
 
 \end{flushleft}
 \subsection{The HTTP/HTTPS Common functionality}
@@ -230,8 +230,10 @@ At first we have a layer which wraps the LibreSSL functions with an interface de
 \section{DSL like interface definitions with syntax definitions}
 \begin{flushleft}
 \end{flushleft}
-%__________________________________________________________________________________________
-\section{APPENDIX A: Terminology Explained in short}
+%_______________________________________________________________-
+% Section five
+%_______________________________________________________________-
+\section{APPENDIX A: Technical Expressions and used Standards Explained in short}
 \subsection{The HTTP 1.1 / 2 / 3 Protocol}   
 \begin{flushleft}
 The HTTP\footnote{\abbrhighcol{HTTP:}  The \abbrhighcol{H}yper \abbrhighcol{T}ext \abbrhighcol {T}ransport \abbrhighcol {P}rotocol used for transport  e.g. \abbrhighcol{HTML} or designing  \abbrhighcol{REST Requests} . The protocol is implemented by all Web Browsers and is used all over the internet to transport / requesting and servicing data in a structured form with defined requests like \abbrhighcol{GET, PUT, DELETE, HEAD ...}. All of these requests have a defined response format.} was developed for transport of data over TCP/IP in a well defined structured way  
@@ -246,7 +248,7 @@ To understand what this means and to understand the difference we will have a cl
 \begin{itemize}
 \item{\abbrhighcol {The TCP protocol:} \footnote{\abbrhighcol {TCP: } \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} The Transmission Control Protocol} 
 \item{\abbrhighcol{The UDP protocol:} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} The User Datagram Protocol}
-\item{\abbrhighcol{The QUIC protocol:} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection} This protocol variant of UDP is placed on the base UDP protocol.}
+\item{\abbrhighcol{The QUIC protocol:} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection} This protocol based on UDP is built using and varying the base UDP protocol implementation }
 \end{itemize}
 \end{flushleft}
 

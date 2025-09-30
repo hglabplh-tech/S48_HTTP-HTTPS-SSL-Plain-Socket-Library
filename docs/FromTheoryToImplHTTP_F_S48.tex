@@ -186,7 +186,10 @@ First we design and implement the procedural interface. In this interface we def
 And now finally let's dive into it more detailed.
 \end{flushleft}
 \subsection{The SSL/TLS procedural interface in C / Scheme}
+\subsubsection{The SSL / TLS procedural interface which is based on \abbrhighcol{LibreSSL} is structured as follows:}
 \begin{flushleft}
+At first we have a layer which wraps the LibreSSL functions with an interface definition according to the FFI for C in Scheme 48.  
+
 \end{flushleft}
 \subsection{The HTTP/HTTPS Common functionality}
 \begin{flushleft}
@@ -221,7 +224,12 @@ And now finally let's dive into it more detailed.
 \subsection{RESTful service layer over HTTP }
 \begin{flushleft}
 \end{flushleft}
-
+%_______________________________________________________________-
+% Section four
+%_______________________________________________________________-
+\section{DSL like interface definitions with syntax definitions}
+\begin{flushleft}
+\end{flushleft}
 %__________________________________________________________________________________________
 \section{APPENDIX A: Terminology Explained in short}
 \subsection{The HTTP 1.1 / 2 / 3 Protocol}   
@@ -233,9 +241,16 @@ With the HTTP/3 now a new way is established with a protocol not based on TCP/IP
 \end{flushleft}
 \subsection{The HTTP/2 and HTTP/3 protocols}
 \begin{flushleft}
-The HTTP/2 protocol is. built on top of the TCP/IP. protocol. A. header values compression takes place here called HPACK. HPACK uses the Huffman algorithm to compress header values in an encode / decode process. Since TCP / IP is designed im the first priority to be reliable and to keep data consistent as well as not loosing data packages it is not optimal for transporting a high amount of data even also parallel in a short time. For that reason \abbrhighcol{HTTP/3} was developed based on the \abbrhighcol {QUIC protocol} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection}.
-\abbrhighcol {TCP}\footnote{\abbrhighcol {TCP:} \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} and \abbrhighcol {UDP} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} are two different ways of handling data transfer and requests in the internet.They handle data and requests and responses. in another way. UDP is connection less unordered and faster. TCP has the advantage that data loss is correctly detected and handled and that the data are checked for consistence the disadvantage is that there is a problem of blocking all transmission in case of a package loss. The QUIC protocol is designed to use UDP with additions  that the consistence of data is save  the advantage is here that the transmissions goes on if there is a package loss as far as it is possible there is no blocking state in cause of package loss.  
+The \abbrhighcol {HTTP/2 protocol} is. built on top of the \abbrhighcol {TCP/IP protocol} while the \abbrhighcol {HTTP/3 protocol}. is built on top of the \abbrhighcol{QUIC protocol}.
+To understand what this means and to understand the difference we will have a closer look on both protocols: 
+\begin{itemize}
+\item{\abbrhighcol {The TCP protocol:} \footnote{\abbrhighcol {TCP: } \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} The Transmission Control Protocol} 
+\item{\abbrhighcol{The UDP protocol:} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} The User Datagram Protocol}
+\item{\abbrhighcol{The QUIC protocol:} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection} This protocol variant of UDP is placed on the base UDP protocol.}
+\end{itemize}
 \end{flushleft}
+
+
 \section{References}
 \label{sec:references}
 \begin{flushleft}

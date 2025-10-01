@@ -241,18 +241,43 @@ The HTTP 1.1 protocol was and is widely used for a long time.
 After this the HTTP 2.0 protocol was developed containing many new features and optimizing especially in compressing header information via HPAC to lower the amount of data transported per each request.
 With the HTTP/3 now a new way is established with a protocol not based on TCP/IP but on a protocol called QUIC which is built on top of UDP.
 \end{flushleft}
+\subsection{Why a complete change in the versions is neccesary }
+\begin{flushleft}
+Over the decades the internet and how it is used changed dramatically. In the beginning there where maybe a few millions of users now we talk about a user count of millions * 100 or more. The other important change is the amount of data consumed. by one user climbed higher exponentially. This leads at the one hand to the need of more and more servers and since hardware and its power is a not endless resource new protocols. are needed to get the goal. UDP and TCP are very 'old' they both have many advantages as well as disadvantages. So we had to pack HTTP Header data at first with HPAC and after that a new. protocol (in the first version invented by Google Inc. takes place and is based on the much faster UDP but with many enhancements. HTTP/3 uses this protocol with QPAC which has advantages regarding blocking states over HPAC. And now let us have a look on the protocols.
+       
+\end{flushleft}
 \subsection{The HTTP/2 and HTTP/3 protocols}
 \begin{flushleft}
 The \abbrhighcol {HTTP/2 protocol} is. built on top of the \abbrhighcol {TCP/IP protocol} while the \abbrhighcol {HTTP/3 protocol}. is built on top of the \abbrhighcol{QUIC protocol}.
-To understand what this means and to understand the difference we will have a closer look on both protocols: 
+To understand what this means and to understand the difference we will have a closer look on both protocols (For a short overview see:\hyperref[tab:TCPvsUDP]{Table 1}): 
 \begin{itemize}
-\item{\abbrhighcol {The TCP protocol:} \footnote{\abbrhighcol {TCP: } \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} The Transmission Control Protocol} 
+\item{\abbrhighcol {The TCP protocol:} \footnote{\abbrhighcol {TCP: } \abbrhighcol {T}ransmission \abbrhighcol {C}ontrol \abbrhighcol {P}rotocol} The Transmission Control Protocol is the most widely used protocol in the internet today. \newline The advantage is that it is a  secure protocol regarding the situation that packages. can be lost. A package loss is for sure detected by the peer and is handled correctly.\newline One of the disadvantages is the high cost for connection establishment (there is a high amount of overhead) and the high cost of opening a connection and doing a handshake with the peer. The protocol supports all versions of SSL/TLS. Since this this protocol is used so. often the internet data transmission layer is labeled as "TCP / IP" although there exists also a "UDP / IP.} 
 \item{\abbrhighcol{The UDP protocol:} \footnote{\abbrhighcol{UDP: }\abbrhighcol{U}ser \abbrhighcol{D}atagram \abbrhighcol{P}rotocol} The User Datagram Protocol}
 \item{\abbrhighcol{The QUIC protocol:} \footnote{\abbrhighcol {QUIC protocol:} \abbrhighcol{Q}uick \abbrhighcol {U}DP \abbrhighcol{I}nternet \abbrhighcol{C}onnection} This protocol based on UDP is built using and varying the base UDP protocol implementation }
 \end{itemize}
 \end{flushleft}
+\end{multicols}
+\section{Appendix B: Tables and Graphics}
 
-
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\hline
+\abbrhighcol{TCP} & \abbrhighcol{UDP} \\
+\hline
+Connection Oriented & W / O Connection \\ 
+ \hline
+ Reliable & Unreliable \\
+ \hline  
+ Defined package order & Unclear package order \\
+ \hline  
+Redo in case of package loss & Package loss ignored \\
+ \hline 
+ \end{tabular}
+\end{center}
+Table 1: \abbrhighcol{TCP vs. UDP}
+\label{tab:TCPvsUDP}
+\begin{multicols}{2}
 \section{References}
 \label{sec:references}
 \begin{flushleft}

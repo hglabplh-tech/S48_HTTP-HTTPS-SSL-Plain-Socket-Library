@@ -60,7 +60,9 @@
 \newcommand{\rubric}[1]{\subsection*{~\hfill {\it #1} \hfill ~}}
 \newcommand{\abbrhighcol}[1]{\textbf{\textit{#1}}}
 \newcommand{\titlereference}[1]{\textsl{#1}}
-% end of "some commands"
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+ % end of "some commands"
 \title{An implementation of HTTP /HTTPS and SSL for Scheme 48 }
 \author{Harald Glab-Plhak {\textless}\href{mailto:hglabplhak@icloud.com}{hglabplhak@icloud.com}{\textgreater}}
 \date{\today{}}
@@ -177,8 +179,16 @@ In this layer a grammar is defined to have a save way to create \abbrhighcol{ HT
 \end{flushleft}
 
 
-%_______________________________________________________________-
+%_______________________________________________________________
 % Section three
+%_______________________________________________________________
+\section{Proof of concept based on HTTP-EASY and its dependencies written in racket}
+\begin{flushleft}
+For the first implementation of the QUIC protocol and HTTP/3 with QPAC as well as full support of HTTP/2 with HPAC we choose the  project \href{https://pkgs.racket-lang.org/package/http-easy-lib}{HTTP-EASY (Lib Site)}. The main reason is that we can test in the fork of the implementation how much effort it will take to implement HPAC QPAC QUIC HTTP/2 and HTTP/3 in a nearly pure functional way without using native C libraries.\newline As pool for ideas doing this we use the Haskell project simply called quic. \href{https://github.com/hglabplh-tech/quic.git}{QUIC - Haskell} and msquic  \href{https://github.com/hglabplh-tech/msquic.git}{MS QUIC Implementation}   (The links here are of my forked versions of the original projects).
+\end{flushleft}
+
+%_______________________________________________________________-
+% Section four
 %_______________________________________________________________-
 \section{Procedural interface definitions}
 \begin{flushleft}
@@ -225,13 +235,13 @@ At first we have a layer which wraps the LibreSSL functions with an interface de
 \begin{flushleft}
 \end{flushleft}
 %_______________________________________________________________-
-% Section four
+% Section five
 %_______________________________________________________________-
 \section{DSL like interface definitions with syntax definitions}
 \begin{flushleft}
 \end{flushleft}
 %_______________________________________________________________-
-% Section five
+% Section six
 %_______________________________________________________________-
 \section{APPENDIX A: Technical Expressions and used Standards Explained in short}
 \subsection{The HTTP 1.1 / 2 / 3 Protocol}   
@@ -259,7 +269,7 @@ To understand what this means and to understand the difference we will have a cl
 \end{multicols}
 \section{Appendix B: Tables and Graphics}
 
-\begin{center}
+\begin{flushleft}
 \begin{tabular}{|c|c|}
 \hline
 \hline
@@ -274,9 +284,32 @@ Connection Oriented & W / O Connection \\
 Redo in case of package loss & Package loss ignored \\
  \hline 
  \end{tabular}
-\end{center}
-Table 1: \abbrhighcol{TCP vs. UDP}
+ \newline
+ \newline
+ Table 1: \abbrhighcol{TCP vs. UDP}
 \label{tab:TCPvsUDP}
+\newline
+\newline
+\newline
+\begin{tabular}{|c|c|}
+\hline
+\hline
+\abbrhighcol{UDP} & \abbrhighcol{QUIC} \\
+\hline
+\specialcell{W / O Connection and stateless \\ peer waits for packages} & \specialcell{Connection  oriented stateful \\ Client / Server connection}\\ 
+ \hline
+ \specialcell{The package order is not defined. \\ Applications have to look for \\ the order themselves}   & \specialcell{The package order is well defined \\ but there is also the possibility\\. to send packages unordered}   \\
+ \hline  
+ \specialcell{Package loss is not handled}  & \specialcell{Has a Package loss detection \\ and handles a Package loss} \\
+ \hline  
+\specialcell{nothing for reset a transmission} & \specialcell{a transmission can be resetted} \\
+ \hline 
+ \end{tabular}
+ \newline
+ \newline
+ Table 2: \abbrhighcol{Differences between UDP and QUIC which is built on it}
+\label{tab:DivUDP_QUIC}
+\end{flushleft}
 \begin{multicols}{2}
 \section{References}
 \label{sec:references}

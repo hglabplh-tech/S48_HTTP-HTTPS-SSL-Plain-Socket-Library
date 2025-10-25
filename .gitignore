@@ -54,3 +54,7 @@ docs/FromTheoryToImplHTTP_F_S48.aux
 docs/FromTheoryToImplHTTP_F_S48.log
 *.gz
 *.toc
+*.log
+*.aux
+*.synctex(busy)
+docs/New Folder With Items/FromTheoryToImplHTTP_F_S48.pdf
